@@ -24,6 +24,19 @@ $(document).on('click','.be_first',function() {
     displayLeads(beFirstArr);    
 });
 
+$(document).on('click','.trail',function() {    
+    let _token = $('input[name="_token"]').val();
+    let trail_id = $(this).attr("trail_id");
+    let lead_id = $(this).attr("lead_id");
+
+    const obj = {_token,trail_id,lead_id};
+    getJSONResponse("addleadstrail",obj).then((data) => {
+        console.log(data);
+    }).catch((error) => {
+        console.error('Failed to fetch leads:', error);  // Handle the error here
+    });         
+});
+
 
 $(document).on('click','.my_urgent',function() {
     $("#myleads").empty();

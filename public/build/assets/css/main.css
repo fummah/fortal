@@ -366,3 +366,7 @@ body{
 .bold-text {
     font-weight: bold;
 }
+.whatsapp-div{
+    display: flex;
+    gap: 20px;
+}

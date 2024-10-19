@@ -16,7 +16,9 @@ use App\Http\Controllers\TemplatesController;
 use Illuminate\Support\Facades\DB;
 use App\Models\ServicePossibleAnswer;
 use App\Models\ServiceQuestion;
-
+use App\Models\LeadsTrailModel;
+use App\Models\TrailsModel;
+use Exception;
 
 class LeadsController extends Controller
 {
@@ -283,5 +285,34 @@ private function arrLeads($leads = array())
         
         return $maskedPhone;
     }
-    
+
+    public function goToEmail(Request $request){
+        $user = $request->user();
+        $full_name = $user->first_name." ".$user->last_name;
+        $message = "Hi ".$user->first_name.",<br/><br/>I found your job on Fortai and wanted to reach out and say hello..<br/><br/>It looks like a perfect match for what I do - 
+        I'd love to help you make it happen. Do you have time for a quick call today?<br/><br/>All the best<br/><br/>".$full_name;
+        return view('leads.compose-email',compact(["message"]));
+    }
+    public function addLeadsTrail(Request $request)
+    {
+        try{
+        $user = $request->user();
+        $lead_id = (int)$request->lead_id;
+        $trail_id =(int)$request->trail_id; 
+        $fixed_trail = TrailsModel::where('id',$trail_id)->first();
+        $description = $fixed_trail["trail"];
+        $trail = LeadsTrailModel::create([
+'lead_id'=>$lead_id, 
+'user_id'=>$user->id, 
+'description'=>$description, 
+'entered_by'=>$user->id
+        ]);
+        return response()->json(['message'=>'Successfull added','trail'=>$trail,'trail_id'=>$trail_id,'status'=>true],200);
+    }
+    catch(Exception $e){
+        return response()->json(['message'=>'There is an error : '.$e->getMessage(),'status'=>false],500);
+    }
+    }
+
+      
 }

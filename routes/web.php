@@ -34,6 +34,8 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::post('/leaddetails', [LeadsController::class, 'getLeadDetails'])->name('lead_details'); 
     Route::post('/getresponsedetails', [LeadsController::class, 'getResponseDetails'])->name('getresponsedetails'); 
     Route::post('/opencontacts', [LeadsController::class, 'openContacts'])->name('open_contacts'); 
+    Route::get('/gotoemail', [LeadsController::class, 'goToEmail'])->name('gotoemail'); 
+    Route::post('/addleadstrail', [LeadsController::class, 'addLeadsTrail'])->name('addleadstrail'); 
 });
 
 require __DIR__.'/auth.php';

@@ -329,7 +329,7 @@ $details .= "<div class='toolbar-container my-4 pt-1 text-md-sm w-100 w-md-auto'
   
             $details .= "<div><a href='#modal-whatsapp' class='Button_base__5Wcwx Button_sm__RWLp1 Button_smWithIcon__y3vYd Button_minWidth__WGVzH Button_textWhite__9w5Wn Button_bgDarkBlue__9V6YV !tw-no-underline tw-drop-shadow-[unset] !tw-px-2 !tw-min-h-[unset] tw-text-sm !tw-text-white btnDetails whatsap' contact_number='$contact_number' uk-toggle><i class='bi bi-whatsapp'></i> Send Whatsapp</a>";
 
-            $details .= "<a href='#' class='Button_base__5Wcwx Button_sm__RWLp1 Button_smWithIcon__y3vYd Button_minWidth__WGVzH Button_textWhite__9w5Wn Button_bgDarkBlue__9V6YV !tw-no-underline tw-drop-shadow-[unset] !tw-px-2 !tw-min-h-[unset] tw-text-sm !tw-text-white btnDetails' uk-toggle><i class='bi bi-envelope'></i> Send Email</a>";
+            $details .= "<a href='/gotoemail' target='_blank' class='Button_base__5Wcwx Button_sm__RWLp1 Button_smWithIcon__y3vYd Button_minWidth__WGVzH Button_textWhite__9w5Wn Button_bgDarkBlue__9V6YV !tw-no-underline tw-drop-shadow-[unset] !tw-px-2 !tw-min-h-[unset] tw-text-sm !tw-text-white btnDetails'><i class='bi bi-envelope'></i> Send Email</a>";
             
             $details .= "<a href='#modal-sms' class='Button_base__5Wcwx Button_sm__RWLp1 Button_smWithIcon__y3vYd Button_minWidth__WGVzH Button_textWhite__9w5Wn Button_bgDarkBlue__9V6YV !tw-no-underline tw-drop-shadow-[unset] !tw-px-2 !tw-min-h-[unset] tw-text-sm !tw-text-white btnDetails' uk-toggle><i class='bi bi-chat-left-fill'></i> Send SMS</a><div>";
         
@@ -579,38 +579,48 @@ $details .= "
 </div>
 ";
 
-$details .= "<div id='modal-whatsapp' uk-modal><div class='uk-modal-dialog uk-modal-body'><br><h2 class='uk-modal-title' align='center'>Send an SMS</h2><br>
+$details .= "<div id='modal-whatsapp' class='uk-flex-top' uk-modal><div class='uk-modal-dialog uk-modal-body uk-margin-auto-vertical'>
+<button class='uk-modal-close-default' type='button' uk-close></button>
+<br>
+<h2 class='uk-modal-title' align='center'>Send an SMS</h2><br>
         <p align='center'>Did you message $first_name on WhatsApp</p><br> 
         <div class='d-flex justify-content-center align-items-start response-btns-container'>
-        <div class='text-center d-flex justify-content-center align-items-center flex-column response-btn'>
+        <div class='whatsapp-div'>
+        <div class='text-center d-flex justify-content-center align-items-center flex-column response-btn trail' trail_id='4' lead_id='$lead_id'>
             <button id='js-whatsapp-response-feedback-is-not-on-btn' class='btn bg-danger mb-2'> <span class='bark-svg-icon bsi-primary-white '><svg width='24' height='24' viewBox='0 0 24 24' fill='none' xmlns='http://www.w3.org/2000/svg'>
 <path d='M12 2C6.48 2 2 6.48 2 12C2 17.52 6.48 22 12 22C17.52 22 22 17.52 22 12C22 6.48 17.52 2 12 2ZM12 20C7.58 20 4 16.42 4 12C4 10.15 4.63 8.45 5.69 7.1L16.9 18.31C15.55 19.37 13.85 20 12 20ZM18.31 16.9L7.1 5.69C8.45 4.63 10.15 4 12 4C16.42 4 20 7.58 20 12C20 13.85 19.37 15.55 18.31 16.9Z' fill='white'></path>
 </svg>
 </span> </button>
-            <span class='regular-text text-xs text-danger'>Number isn’t on WhatsApp</span>
+            <span class='regular-text text-xs text-danger'>Number isn't on WhatsApp</span>
         </div>
-        <div class='text-center d-flex justify-content-center align-items-center flex-column response-btn'>
+        <div class='text-center d-flex justify-content-center align-items-center flex-column response-btn trail' trail_id='5' lead_id='$lead_id'>
             <button id='js-whatsapp-response-feedback-could-not-make-it-work-btn' class='btn bg-grey-200 mb-2'> <span class='bark-svg-icon bsi-primary-white '><svg width='24' height='24' viewBox='0 0 24 24' fill='none' xmlns='http://www.w3.org/2000/svg'>
 <path d='M12 2C6.48 2 2 6.48 2 12C2 17.52 6.48 22 12 22C17.52 22 22 17.52 22 12C22 6.48 17.52 2 12 2ZM12 20C7.59 20 4 16.41 4 12C4 7.59 7.59 4 12 4C16.41 4 20 7.59 20 12C20 16.41 16.41 20 12 20ZM11 16H13V18H11V16ZM12.61 6.04C10.55 5.74 8.73 7.01 8.18 8.83C8 9.41 8.44 10 9.05 10H9.25C9.66 10 9.99 9.71 10.13 9.33C10.45 8.44 11.4 7.83 12.43 8.05C13.38 8.25 14.08 9.18 14 10.15C13.9 11.49 12.38 11.78 11.55 13.03C11.55 13.04 11.54 13.04 11.54 13.05C11.53 13.07 11.52 13.08 11.51 13.1C11.42 13.25 11.33 13.42 11.26 13.6C11.25 13.63 11.23 13.65 11.22 13.68C11.21 13.7 11.21 13.72 11.2 13.75C11.08 14.09 11 14.5 11 15H13C13 14.58 13.11 14.23 13.28 13.93C13.3 13.9 13.31 13.87 13.33 13.84C13.41 13.7 13.51 13.57 13.61 13.45C13.62 13.44 13.63 13.42 13.64 13.41C13.74 13.29 13.85 13.18 13.97 13.07C14.93 12.16 16.23 11.42 15.96 9.51C15.72 7.77 14.35 6.3 12.61 6.04V6.04Z' fill='white'></path>
 </svg>
 </span> </button>
             <span class='regular-text text-xs text-grey-600'>I couldn’t make it work</span>
         </div>
-        <div class='text-center d-flex justify-content-center align-items-center flex-column response-btn'>
+        <div class='text-center d-flex justify-content-center align-items-center flex-column response-btn trail' trail_id='3' lead_id='$lead_id'>
             <button id='js-whatsapp-response-feedback-sent-message-btn' class='btn bg-success mb-2'> <span class='bark-svg-icon bsi-primary-white '><svg width='24' height='24' viewBox='0 0 24 24' fill='none' xmlns='http://www.w3.org/2000/svg'>
 <path d='M12 2C6.48 2 2 6.48 2 12C2 17.52 6.48 22 12 22C17.52 22 22 17.52 22 12C22 6.48 17.52 2 12 2ZM12 20C7.59 20 4 16.41 4 12C4 7.59 7.59 4 12 4C16.41 4 20 7.59 20 12C20 16.41 16.41 20 12 20ZM15.88 8.29L10 14.17L8.12 12.29C7.73 11.9 7.1 11.9 6.71 12.29C6.32 12.68 6.32 13.31 6.71 13.7L9.3 16.29C9.69 16.68 10.32 16.68 10.71 16.29L17.3 9.7C17.69 9.31 17.69 8.68 17.3 8.29C16.91 7.9 16.27 7.9 15.88 8.29V8.29Z' fill='white'></path>
 </svg>
 </span> </button>
             <span class='regular-text text-xs text-success'>I sent a message</span>
         </div>
+        </div>
     </div>
         </div></div>";
 
-   $details .= "<div id='modal-sms' uk-modal><div class='uk-modal-dialog uk-modal-body'><br><h2 class='uk-modal-title' align='center'>Send an SMS</h2><br>
+   $details .= "<div id='modal-sms' class='uk-flex-top' uk-modal><div class='uk-modal-dialog uk-modal-body uk-margin-auto-vertical'>
+   <button class='uk-modal-close-default' type='button' uk-close></button>
+   <br><h2 class='uk-modal-title' align='center'>Send an SMS</h2><br>
         <p align='center'>Send an SMS to $first_name using the number below.</p><br> <h4 align='center'><a href='tel:$contact_number'>$contact_number</a></h4><br>
-   <hr/><br><p class='uk-text-right'><button class='uk-button uk-button-default uk-modal-close' type='button'>Cancel</button><button class='uk-button uk-button-primary' type='button'>I've sent SMS</button></p></div></div>";
+   <hr/><br><p class='uk-text-right'><button class='uk-button uk-button-default uk-modal-close' type='button'>Cancel</button>
+   <button class='uk-button uk-button-primary trail' trail_id='2' lead_id='$lead_id' type='button'>I've sent SMS</button></p></div></div>";
 
-   $details .= "<div id='modal-estimate' uk-modal><div class='uk-modal-dialog uk-modal-body'><br><h2 class='uk-modal-title' align='center'>Send an estimate</h2><br>
+   $details .= "<div id='modal-estimate' class='uk-flex-top' uk-modal><div class='uk-modal-dialog uk-modal-body uk-margin-auto-vertical'>
+   <button class='uk-modal-close-default' type='button' uk-close></button>
+   <br><h2 class='uk-modal-title' align='center'>Send an estimate</h2><br>
          <h4 align='center'>Enter a guide price and some notes to explain your charges</h4><br>
          <div class='estimate-form my-4'> <div class='form-row estimate align-items-center mx-0 mb-2 py-1'>
                             <div class='estimate-value-input'>
@@ -618,7 +628,7 @@ $details .= "<div id='modal-whatsapp' uk-modal><div class='uk-modal-dialog uk-mo
                                     <div class='input-group-prepend'>
                                         <span class='input-group-text pr-1 text-grey-400 border-white text-xl' id='estimate-currency-symbol'>R</span>
                                     </div>
-                                    <input type='number' class='form-text-field estimate-amount form-control pl-1 text-xl' id='estimate-amount' placeholder='0'>
+                                    <input type='number' class='form-text-field estimate-amount form-control pl-1 text-md' id='estimate-amount' placeholder='0'>
                                     <div class='input-group-append'>
                                         <div class='bar py-2'>
                                             <span class='bg-grey-200 d-block h-100' style='width: 2px;'></span>
@@ -628,7 +638,7 @@ $details .= "<div id='modal-whatsapp' uk-modal><div class='uk-modal-dialog uk-mo
                             </div>
                             <div class='estimate-value-select'>
                                 <label for='estimate-type' class='sr-only m-0'>Estimate</label>
-                                <select class='form-select-field estimate-type custom-select custom-select-wider text-xs prevent-ios-zoom pt-2' id='estimate-type'>
+                                <select class='form-select-field estimate-type custom-select custom-select-wider text-md prevent-ios-zoom pt-2' id='estimate-type'>
                                     <option value=''>select one</option>
                                     <option value='onceoff'>one off fee</option>
                                     <option value='hour'>/ hour</option>
