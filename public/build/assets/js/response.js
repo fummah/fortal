@@ -24,6 +24,7 @@ $(document).on('click','.be_first',function() {
     displayLeads(beFirstArr);    
 });
 
+<<<<<<< HEAD
 $(document).on('click','.trail',function() {    
     let _token = $('input[name="_token"]').val();
     let trail_id = $(this).attr("trail_id");
@@ -37,6 +38,8 @@ $(document).on('click','.trail',function() {
     });         
 });
 
+=======
+>>>>>>> upstream/main
 
 $(document).on('click','.my_urgent',function() {
     $("#myleads").empty();
