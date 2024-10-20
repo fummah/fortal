@@ -1,3 +1,9 @@
+
+    <style>@media (min-width: 960px) {
+    .uk-child-width-1-2\@m>* {
+        width: 13% !important;
+    }
+}</style>
 <div class="uk-section uk-section-default">
     <div class="uk-container">
     <header>
@@ -18,7 +24,7 @@
             <div class="uk-grid-match uk-child-width-1-2@m uk-margin" uk-grid>
                 <div>
                     <img src="{{ $user->profile_picture_url ?? asset('build/assets/img/profile_avatar.png') }}" 
-                         alt="Profile Picture" class="rounded-full w-32 h-32 object-cover">
+                         alt="Profile Picture" class="rounded-full w-20 h-32 object-cover">
                 </div>
                 <div>
                     <label for="profile_picture" class="block text-sm font-medium text-gray-700"><h2><b>{{ __('Upload Profile Picture') }}</b></h2></label>
@@ -42,12 +48,12 @@
             </div>
             <div class="mb-4">
                     <label class="block text-gray-700" for="business-name">{{ __('Business Name (optional)') }}</label>
-                    <input type="text" id="business-name" name="business-name" class="mt-1 block w-full p-2 border border-gray-300 rounded" required>
+                    <input type="text" id="business-name" name="business-name" class="mt-1 block w-full p-2 border border-gray-300 rounded" >
                 </div>
                 
                 <div class="mb-4">
                     <label class="block text-gray-700" for="business-registration-number">{{ __('Business Registration Number (optional)') }}</label>
-                    <input type="email" id="business-registration-number" name="business-registration-number" class="mt-1 block w-full p-2 border border-gray-300 rounded" required>
+                    <input type="text" id="business-registration-number" name="business-registration-number" class="mt-1 block w-full p-2 border border-gray-300 rounded" >
                 </div>
 
             <h2><b>{{ __('Contact Information*') }}</b></h2>
