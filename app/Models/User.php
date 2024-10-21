@@ -30,6 +30,8 @@ class User extends Authenticatable
         'company_size',
         'is_company_social_media',
         'is_company_sales_team',
+        'company_name',
+        'company_registration_number'
     ];
 
     /**

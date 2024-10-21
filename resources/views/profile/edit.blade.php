@@ -11,11 +11,7 @@
                     <i class="bi bi-gear"></i> Services
                 </button>
             </li>
-            <!--<li class="mr-1">
-                <button class="bg-white inline-block py-2 px-4 text-gray-500 hover:text-blue-500 tab-button" onclick="showContent('business-info', this)">
-                    <i class="bi bi-building"></i> Business Information
-                </button>
-            </li>-->
+         
             <li class="mr-1">
                 <button class="bg-white inline-block py-2 px-4 text-gray-500 hover:text-blue-500 tab-button" onclick="showContent('buy-credits', this)">
                     <i class="bi bi-credit-card"></i> Buy More Credits

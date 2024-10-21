@@ -23,7 +23,7 @@
         </div>
         <div class='modal-footer justify-content-between'>
         <button class='btn btn-success credit-upsell-topup-submit mx-auto'>
-            <span >You have {{$credits_balance}}credits</span>
+            <span >You have {{{$credits_balance}} Credits</span>
           <span class='loading-text'><span class='spinner spinner-border d-none'></span></span>
         </button>
     </div>
