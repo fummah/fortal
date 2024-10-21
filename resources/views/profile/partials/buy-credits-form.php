@@ -21,8 +21,12 @@
         <div class="row" style="font-weight:bold">
          <h2 class="col-12 subsection-title">My credits</h2>
         </div>
-        <br>
-        <p>Credits enable you to reach out to customers on Fortai. Purchasing credits in larger quantities allows you to take advantage of better pricing. For additional information about credits and our service charges, please visit the Help Centre.</p>
+        <div class='modal-footer justify-content-between'>
+        <button class='btn btn-success credit-upsell-topup-submit mx-auto'>
+            <span >You have {{{$credits_balance}} Credits</span>
+          <span class='loading-text'><span class='spinner spinner-border d-none'></span></span>
+        </button>
+    </div>
     </div>
 </div>
 <div class='modal-alerts px-2'></div>
