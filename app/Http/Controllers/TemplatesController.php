@@ -142,9 +142,8 @@ class TemplatesController extends Controller
         }   
 
   
-  public function showResponseDetails( $lead_id,$lead,$first_letter,$first_name,$last_name,$contacted,$remender,$lead_user_id,$frequent,$urgent,$is_phone_verified,$time,$service_name,$location,$description,$hiring_decision,$credits,$email,$contact_number,$lead_status){
-   
-   
+  public function showResponseDetails( $lead_id,$lead,$first_letter,$first_name,$last_name,$contacted,$remender,$lead_user_id,$frequent,$urgent,$is_phone_verified,$time,$service_name,$location,$description,$hiring_decision,$credits,$email,$contact_number,$lead_status,$leads_trail){
+     
     $details = " <div class='col-12 col-md-7 col-lg right-panel fixed-height-column scroll-touch h-100 d-block'
                 id='main-project-container' style='max-height: 870px;'>
                 <div class='right-panel-wrapper ml-lg-4'>
@@ -388,7 +387,7 @@ $details .= "<div class='toolbar-container my-4 pt-1 text-md-sm w-100 w-md-auto'
 
         $details .= "
         <div id='response-sections' class='mt-4'>
-            <ul class='nav nav-tabs mb-3' id='response-sections-tabs' role='tablist'>
+            <ul class='nav nav-tabs mb-3 uk-tab' id='response-sections-tabs' role='tablist' data-uk-tab='{connect:'#my-id'}'>
                 <li class='nav-item pr-1 pr-sm-2 mr-1 mr-sm-3'>
                     <a class='nav-link active px-1 text-sm text-sm-md' id='activity-tab' data-toggle='tab' href='#response-activity' role='tab' aria-controls='home' aria-selected='true'>Activity</a>
                 </li>
@@ -398,186 +397,17 @@ $details .= "<div class='toolbar-container my-4 pt-1 text-md-sm w-100 w-md-auto'
                 <li class='nav-item'>
                     <a class='nav-link px-1 text-sm text-sm-md' id='notes-tab' data-toggle='tab' href='#response-notes' role='tab' aria-controls='contact' aria-selected='false'>My Notes</a>
                 </li>
-            </ul>
-        </div>
-        
-        <div class='tab-content' id='myTabContent'>
-            <div class='tab-pane fade show active pt-md-3' id='response-activity' role='tabpanel' aria-labelledby='activity-tab'>
-                <div id='activity-log'>
-                    <div id='activity-log-container' class=''>
-                        <div id='activity-log-items-container'>
-                            <div class='activity-log-date-item d-flex justify-content-start first'>
-                                <div class='left-track flex-grow-0 d-flex flex-column align-items-center'>
-                                    <div class='line full flex-fill'></div>
-                                </div>
-                                <div class='date-container flex-fill pt-2 pb-3 text-center'>
-                                    <span class='text-xs text-grey-400'>Mon 23 Sept</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>";
-    
+            </ul>";
 
-        $details .= "
-        <div class='activity-log-item d-flex justify-content-between first' data-hash='ca53df1ebe434b6f14bd02c0fe7694ad'>
-            <div class='left-track flex-grow-0 d-flex flex-column align-items-center'>
-                <div class='line top'></div>
-                <div class='item-icon item-icon-called_alt'>
-                    <div class='icon-border border rounded-circle d-flex justify-content-center align-items-center' style='background-color:#111637'>
-                        <img class='' src='https://d1w7gvu0kpf6fl.cloudfront.net/img/icons/activities-icons/svg/telephone-white.svg' alt=''>
-                    </div>
-                </div>
-                <div class='line bottom flex-fill'></div>
-            </div>
-            <div class='details flex-column flex-grow-1 ml-2 mb-4 p-3 border text-sm'>
-                <div class='details-top d-flex justify-content-between text-sm text-grey-400'>
-                    <div class='details-top-left flex-grow-1'>
-                        <div class='item-actor-name'>You</div>
-                    </div>
-                    <div class='details-top-right'>
-                        <div class='item-date'>07:28</div>
-                    </div>
-                </div>
-                <div class='details-center'>
-                    <p class='item-message mb-0 mt-1'>Called but got no answer</p>
-                </div>
-            </div>
-        </div>
-    ";
-                                                      
-                    
-    $details .= "
-    <div class='activity-log-item d-flex justify-content-between' data-hash='c4fe0c10d14b69d6a9c8ca5d41e984b3'>
-        <div class='left-track flex-grow-0 d-flex flex-column align-items-center'>
-            <div class='line top'></div>
-            <div class='item-icon item-icon-sent_email_alt'>
-                <div class='icon-border border rounded-circle d-flex justify-content-center align-items-center' style='background-color:#111637'>
-                    <img src='https://d1w7gvu0kpf6fl.cloudfront.net/img/icons/activities-icons/svg/envelope-white.svg' alt=''>
-                </div>
-            </div>
-            <div class='line bottom flex-fill'></div>
-        </div>
-        <div class='details flex-column flex-grow-1 ml-2 mb-4 p-3 border text-sm'>
-            <div class='details-top d-flex justify-content-between text-sm text-grey-400'>
-                <div class='details-top-left flex-grow-1'>
-                    <div class='item-actor-name'>You</div>
-                </div>
-                <div class='details-top-right'>
-                    <div class='item-date'>07:27</div>
-                </div>
-            </div>
-            <div class='details-center'>
-                <p class='item-message mb-0 mt-1'>Sent 'first_name' an email</p>
-            </div>
-            <div class='details-bottom'>
-                <div class='item-content text-grey-600'>
-                    <p class='mb-0'><a href='/sellers/messenger/view-email/7jPDlw1E/' target='_blank'>View</a></p>
-                    <a href='#' class='show-more-link mt-3'>Show more</a>
-                    <a href='#' class='show-less-link mt-3'>Show less</a>
-                </div>
-            </div>
-        </div>
-    </div>
-    
-    <div class='activity-log-item d-flex justify-content-between' data-hash='0de4fd57f215d42496181f36f664fbd4'>
-        <div class='left-track flex-grow-0 d-flex flex-column align-items-center'>
-            <div class='line top'></div>
-            <div class='item-icon item-icon-called_alt'>
-                <div class='icon-border border rounded-circle d-flex justify-content-center align-items-center' style='background-color:#111637'>
-                    <img src='https://d1w7gvu0kpf6fl.cloudfront.net/img/icons/activities-icons/svg/telephone-white.svg' alt=''>
-                </div>
-            </div>
-            <div class='line bottom flex-fill'></div>
-        </div>
-        <div class='details flex-column flex-grow-1 ml-2 mb-4 p-3 border text-sm'>
-            <div class='details-top d-flex justify-content-between text-sm text-grey-400'>
-                <div class='details-top-left flex-grow-1'>
-                    <div class='item-actor-name'>You</div>
-                </div>
-                <div class='details-top-right'>
-                    <div class='item-date'>07:23</div>
-                </div>
-            </div>
-            <div class='details-center'>
-                <p class='item-message mb-0 mt-1'>Called but got no answer</p>
-            </div>
-        </div>
-    </div>
-";
-                                                             
-
-
-$details .= "
-<div class='activity-log-item d-flex justify-content-between' data-hash='b938fc094f8f6b995fac73cb6a202a4c'>
-    <div class='left-track flex-grow-0 d-flex flex-column align-items-center'>
-        <div class='line top'></div>
-        <div class='item-icon item-icon-project_purchased_alt'>
-            <div class='icon-border border rounded-circle d-flex justify-content-center align-items-center' style='background-color:#111637'>
-                <img src='https://d1w7gvu0kpf6fl.cloudfront.net/img/icons/activities-icons/svg/credit-white.svg' alt=''>
-            </div>
-        </div>
-        <div class='line bottom flex-fill'></div>
-    </div>
-    <div class='details flex-column flex-grow-1 ml-2 mb-4 p-3 border text-sm'>
-        <div class='details-top d-flex justify-content-between text-sm text-grey-400'>
-            <div class='details-top-left flex-grow-1'>
-                <div class='item-actor-name'>You</div>
-            </div>
-            <div class='details-top-right'>
-                <div class='item-date'>07:19</div>
-            </div>
-        </div>
-        <div class='details-center'>
-            <p class='item-message mb-0 mt-1'>Purchased the lead</p>
-        </div>
-    </div>
-</div>
-
-<div class='activity-log-item d-flex justify-content-between' data-hash='54dbac5ebaec03bc98a5d0ac9ca18406'>
-    <div class='left-track flex-grow-0 d-flex flex-column align-items-center'>
-        <div class='line top'></div>
-        <div class='item-icon item-icon-project_released'>
-            <div class='icon-border border rounded-circle d-flex justify-content-center align-items-center' style='background-color:#F3F3F6'>
-                <img src='https://d1w7gvu0kpf6fl.cloudfront.net/img/icons/activities-icons/svg/looking_for.svg' alt=''>
-            </div>
-        </div>
-        <div class='line bottom flex-fill'></div>
-    </div>
-    <div class='details flex-column flex-grow-1 ml-2 mb-4 p-3 border text-sm'>
-        <div class='details-top d-flex justify-content-between text-sm text-grey-400'>
-            <div class='details-top-left flex-grow-1'>
-                <div class='item-actor-name'>'first_name'</div>
-            </div>
-            <div class='details-top-right'>
-                <div class='item-date'>04:56</div>
-            </div>
-        </div>
-        <div class='details-center'>
-            <p class='item-message mb-0 mt-1'>'description'</p>
-        </div>
-        <hr>
-        <div class='details-bottom'>
-            <div class='item-content text-grey-600'>
-                <p class='mb-0'><a href='#' class='show-project-details' data-project-id='43211537'>View details</a></p>
-                <a href='#' class='show-more-link mt-3'>Show more</a>
-                <a href='#' class='show-less-link mt-3'>Show less</a>
-            </div>
-        </div>
-    </div>
-</div>
-
-<div class='waiting-loader text-center'>
-    <div class='spinner-border text-primary' role='status'>
-        <span class='sr-only'>Loading...</span>
-    </div>
-</div>
-<div class='w-100 text-center'>
-    <a href='#' class='load-more-items-link btn text-primary border rounded px-4 py-3 mt-3 waiting-hidden d-none'>Show more</a>
-</div>
-";
+         $details .="<ul class='tab-content uk-switcher uk-margin' id='my-id'><li class='tab-pane fade show active' id='response-activity' data-uk-switcher-item='next'>";   
+         $details .= $this-> trail($leads_trail); 
+         $details .= "</li><li class='tab-pane fade' id='response-project-details'>";  
+         $details .= $this-> details(); 
+         $details .= "</li><li class='tab-pane fade' id='response-notes'>";
+         $details .= $this-> notes();
+         $details .= "</li></ul></div>";
+   
+   
 
 $details .= "<div id='modal-whatsapp' class='uk-flex-top' uk-modal><div class='uk-modal-dialog uk-modal-body uk-margin-auto-vertical'>
 <button class='uk-modal-close-default' type='button' uk-close></button>
@@ -904,8 +734,76 @@ if ($frequent > 0) {
 $details .= "<div class='d-flex flex-column project-details-col-project-details'>
                 <div class='project-details pt-5 data-buyer-name='>
                     <div class='project-details-label'>Details</div>
-                    <hr class='project-details-hr'>
-                    <div class='project-details-content'>
+                    <hr class='project-details-hr'>";
+$details .= $this->details();
+                    $details .= "<hr class='lead-settings-prompt-hr'>
+                    <div class='lead-settings-prompt flex'>
+                        <div class='font-weight-medium mb-2'>Not seeing the right leads?</div>
+                        <div class='font-weight-regular mb-2'>Stop seeing leads with specific answers by customising your settings.</div>
+
+                        <div class='update-link-container d-inline-flex align-items-center'>
+                            <span class='fortai-svg-icon bsi-primary-primary bsi-sm mr-2'>
+                                <svg width='24px' height='24px' viewBox='0 0 24 24' version='1.1' xmlns='http://www.w3.org/2000/svg'>
+                                    <g id='Icon/cog' stroke='none' stroke-width='1' fill='none' fill-rule='evenodd'>
+                                        <g id='cog' transform='translate(2.000000, 2.000000)' class='primary-color'>
+                                            <path d='M17.14,10.936 C17.176,10.636 17.2,10.324 17.2,10 C17.2,9.676 17.176,9.364 17.128,9.064 L19.156,7.48 C19.336,7.336 19.384,7.072 19.276,6.868 L17.356,3.544 C17.236,3.328 16.984,3.256 16.768,3.328 L14.38,4.288 C13.876,3.904 13.348,3.592 12.76,3.352 L12.4,0.808 C12.364,0.568 12.16,0.4 11.92,0.4 L8.08,0.4 C7.84,0.4 7.648,0.568 7.612,0.808 L7.252,3.352 C6.664,3.592 6.124,3.916 5.632,4.288 L3.244,3.328 C3.028,3.244 2.776,3.328 2.656,3.544 L0.736,6.868 C0.616,7.084 0.664,7.336 0.856,7.48 L2.884,9.064 C2.836,9.364 2.8,9.688 2.8,10 C2.8,10.312 2.824,10.636 2.872,10.936 L0.844,12.52 C0.664,12.664 0.616,12.928 0.724,13.132 L2.644,16.456 C2.764,16.672 3.016,16.744 3.232,16.672 L5.62,15.712 C6.124,16.096 6.652,16.408 7.24,16.648 L7.6,19.192 C7.648,19.432 7.84,19.6 8.08,19.6 L11.92,19.6 C12.16,19.6 12.364,19.432 12.388,19.192 L12.748,16.648 C13.336,16.408 13.876,16.084 14.368,15.712 L16.756,16.672 C16.972,16.756 17.224,16.672 17.344,16.456 L19.264,13.132 C19.384,12.916 19.336,12.664 19.144,12.52 L17.14,10.936 L17.14,10.936 Z M10,13.6 C8.02,13.6 6.4,11.98 6.4,10 C6.4,8.02 8.02,6.4 10,6.4 C11.98,6.4 13.6,8.02 13.6,10 C13.6,11.98 11.98,13.6 10,13.6 Z' id='Shape'></path>
+                                        </g>
+                                    </g>
+                                </svg>
+                            </span>
+                            <a href='/profile' class='js-lead-prefs-from-lead-link'>Update lead settings</a>";
+$details .= "</div>"; // Closing the update-link-container div
+$details .= "</div>"; // Closing the lead-settings-prompt flex div
+$details .= "</div>"; // Closing the project-details pt-5 data-buyer-name div
+$details .= "</div>"; // Closing the d-flex flex-column project-details-col-project-details div
+
+    return $details;
+}
+
+public function trail($arr)
+{
+    $details = "";
+
+    foreach($arr as $trail)
+    {
+        $first_name = $trail["first_name"];
+        $description = $trail["description"];
+        $date_entered = $trail["date_entered"];
+    $details .= "
+    <div class='activity-log-item d-flex justify-content-between first' data-hash='ca53df1ebe434b6f14bd02c0fe7694ad'>
+        <div class='left-track flex-grow-0 d-flex flex-column align-items-center'>
+            <div class='line top'></div>
+            <div class='item-icon item-icon-called_alt'>
+                <div class='icon-border border rounded-circle d-flex justify-content-center align-items-center' style='background-color:#111637'>
+                    <img class='' src='https://d1w7gvu0kpf6fl.cloudfront.net/img/icons/activities-icons/svg/telephone-white.svg' alt=''>
+                </div>
+            </div>
+            <div class='line bottom flex-fill'></div>
+        </div>
+        <div class='details flex-column flex-grow-1 ml-2 mb-4 p-3 border text-sm'>
+            <div class='details-top d-flex justify-content-between text-sm text-grey-400'>
+                <div class='details-top-left flex-grow-1'>
+                    <div class='item-actor-name'>$first_name</div>
+                </div>
+                <div class='details-top-right'>
+                    <div class='item-date'>$date_entered</div>
+                </div>
+            </div>
+            <div class='details-center'>
+                <p class='item-message mb-0 mt-1'>$description</p>
+            </div>
+        </div>
+    </div>
+";
+    }
+ 
+return $details;
+}
+public function details($arr=[])
+{
+   $details = "";
+   $details .="
+   <div class='project-details-content'>
                         <div class='project-questions-answers highlights'>
                             <div class='project-details-question text-xs text-light-grey pb-2 text-regular'>
                                 What kind of building works do you need?
@@ -932,27 +830,11 @@ $details .= "<div class='d-flex flex-column project-details-col-project-details'
                             <img class='img-fluid rounded loaded' alt='' width='625' height='235' src='https://maps.googleapis.com/maps/api/staticmap?center=-33.93020000000000,18.84490000000000&amp;zoom=11&amp;size=625x235&amp;maptype=roadmap&amp;key=AIzaSyD3p2CemxOtPGf4igCbaMqo4BrNEF8Wktc'>
                         </div>
                     </div>
-                    <hr class='lead-settings-prompt-hr'>
-                    <div class='lead-settings-prompt flex'>
-                        <div class='font-weight-medium mb-2'>Not seeing the right leads?</div>
-                        <div class='font-weight-regular mb-2'>Stop seeing leads with specific answers by customising your settings.</div>
-
-                        <div class='update-link-container d-inline-flex align-items-center'>
-                            <span class='fortai-svg-icon bsi-primary-primary bsi-sm mr-2'>
-                                <svg width='24px' height='24px' viewBox='0 0 24 24' version='1.1' xmlns='http://www.w3.org/2000/svg'>
-                                    <g id='Icon/cog' stroke='none' stroke-width='1' fill='none' fill-rule='evenodd'>
-                                        <g id='cog' transform='translate(2.000000, 2.000000)' class='primary-color'>
-                                            <path d='M17.14,10.936 C17.176,10.636 17.2,10.324 17.2,10 C17.2,9.676 17.176,9.364 17.128,9.064 L19.156,7.48 C19.336,7.336 19.384,7.072 19.276,6.868 L17.356,3.544 C17.236,3.328 16.984,3.256 16.768,3.328 L14.38,4.288 C13.876,3.904 13.348,3.592 12.76,3.352 L12.4,0.808 C12.364,0.568 12.16,0.4 11.92,0.4 L8.08,0.4 C7.84,0.4 7.648,0.568 7.612,0.808 L7.252,3.352 C6.664,3.592 6.124,3.916 5.632,4.288 L3.244,3.328 C3.028,3.244 2.776,3.328 2.656,3.544 L0.736,6.868 C0.616,7.084 0.664,7.336 0.856,7.48 L2.884,9.064 C2.836,9.364 2.8,9.688 2.8,10 C2.8,10.312 2.824,10.636 2.872,10.936 L0.844,12.52 C0.664,12.664 0.616,12.928 0.724,13.132 L2.644,16.456 C2.764,16.672 3.016,16.744 3.232,16.672 L5.62,15.712 C6.124,16.096 6.652,16.408 7.24,16.648 L7.6,19.192 C7.648,19.432 7.84,19.6 8.08,19.6 L11.92,19.6 C12.16,19.6 12.364,19.432 12.388,19.192 L12.748,16.648 C13.336,16.408 13.876,16.084 14.368,15.712 L16.756,16.672 C16.972,16.756 17.224,16.672 17.344,16.456 L19.264,13.132 C19.384,12.916 19.336,12.664 19.144,12.52 L17.14,10.936 L17.14,10.936 Z M10,13.6 C8.02,13.6 6.4,11.98 6.4,10 C6.4,8.02 8.02,6.4 10,6.4 C11.98,6.4 13.6,8.02 13.6,10 C13.6,11.98 11.98,13.6 10,13.6 Z' id='Shape'></path>
-                                        </g>
-                                    </g>
-                                </svg>
-                            </span>
-                            <a href='/profile' class='js-lead-prefs-from-lead-link'>Update lead settings</a>";
-$details .= "</div>"; // Closing the update-link-container div
-$details .= "</div>"; // Closing the lead-settings-prompt flex div
-$details .= "</div>"; // Closing the project-details pt-5 data-buyer-name div
-$details .= "</div>"; // Closing the d-flex flex-column project-details-col-project-details div
-
-    return $details;
+   "; 
+   return $details;
+}
+public function notes()
+{
+    return "";
 }
 }

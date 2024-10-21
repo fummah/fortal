@@ -85,6 +85,7 @@ $details = $templates->showLeadsDetails($lead_id,$lead,$first_letter,$first_name
 }
 public function getResponseDetails(Request $request)
 {
+    $user = $request->user();
     $lead_id = $request->lead_id;
     $profileController = new ProfileController();
     $templates = new TemplatesController();
@@ -106,11 +107,10 @@ public function getResponseDetails(Request $request)
     $credits = $lead->credits;
     $email = $lead->email;
     $contact_number = $lead->contact_number;
-    $masked_email = $this->maskEmail($email);
-    $masked_contact_number = $this->maskPhoneNumber($contact_number);
     $lead_status = $lead->status;
+    $leads_trail = $this->getLeadsTrail($lead_id,$user->id);
    
-$details = $templates->showResponseDetails( $lead_id,$lead,$first_letter,$first_name,$last_name,$contacted,$remender,$lead_user_id,$frequent,$urgent,$is_phone_verified,$time,$service_name,$location,$description,$hiring_decision,$credits,$email,$contact_number,$lead_status);
+$details = $templates->showResponseDetails( $lead_id,$lead,$first_letter,$first_name,$last_name,$contacted,$remender,$lead_user_id,$frequent,$urgent,$is_phone_verified,$time,$service_name,$location,$description,$hiring_decision,$credits,$email,$contact_number,$lead_status,$leads_trail);
 
     return response($details);
 }
@@ -314,5 +314,18 @@ private function arrLeads($leads = array())
     }
     }
 
-      
+    public function getLeadsTrail($lead_id,$user_id)
+    {
+        try{
+        
+        $trails = LeadsTrailModel::join('users as u','leads_trail.user_id','=','u.id')
+        ->select('u.first_name','leads_trail.description','leads_trail.date_entered')        
+        ->where('lead_id',$lead_id)->where('user_id',$user_id)->get();
+        return $trails;
+    }
+    catch(Exception $e){
+        return [];
+    }
+    }
+    
 }

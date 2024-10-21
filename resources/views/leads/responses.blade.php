@@ -1,6 +1,5 @@
 <x-app-layout>
 
-
     <div class="sticky-top enquiriesbanner">
         <div class="flex-fill d-flex">
             <div id="__rctSellerEnquiriesBanner" class="w-100"></div>
