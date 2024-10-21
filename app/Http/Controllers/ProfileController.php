@@ -64,20 +64,20 @@ class ProfileController extends Controller
    
      public function update(ProfileUpdateRequest $request): RedirectResponse
      {
-         // Validate and fill the user's data
+         
          $request->user()->fill($request->validated());
      
-         // If the email has changed, reset the email_verified_at field
+        
          if ($request->user()->isDirty('email')) {
              $request->user()->email_verified_at = null;
          }
      
-         // Check if the user model has any changes before saving
+         
          if ($request->user()->isDirty()) {
-             // Save the user's updated information
+             
              $request->user()->save();
      
-             // Additional data to be flashed to the session
+             
              $first_name = $request->first_name;
              $company_name = $request->company_name;
              $company_registration_number = $request->company_registration_number;

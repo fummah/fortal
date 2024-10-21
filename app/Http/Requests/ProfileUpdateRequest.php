@@ -19,6 +19,7 @@ class ProfileUpdateRequest extends FormRequest
             'first_name' => ['required', 'string', 'max:255'],
             'last_name' => ['required', 'string', 'max:255'],
             'company_name' => ['nullable', 'string', 'max:255'],
+            'company_registration_number' => ['nullable', 'string', 'max:50'],
             'logo' => ['logo'],
             'location'=> ['required','string','max:255'],
             'is_company_website' => ['boolean'],
