@@ -142,7 +142,7 @@ class TemplatesController extends Controller
         }   
 
   
-  public function showResponseDetails( $lead_id,$lead,$first_letter,$first_name,$last_name,$contacted,$remender,$lead_user_id,$frequent,$urgent,$is_phone_verified,$time,$service_name,$location,$description,$hiring_decision,$credits,$email,$contact_number,$lead_status,$leads_trail){
+  public function showResponseDetails( $lead_id,$lead,$first_letter,$first_name,$last_name,$contacted,$remender,$lead_user_id,$frequent,$urgent,$is_phone_verified,$time,$service_name,$location,$description,$hiring_decision,$credits,$email,$contact_number,$lead_status,$leads_trail,$leads_notes){
      
     $details = " <div class='col-12 col-md-7 col-lg right-panel fixed-height-column scroll-touch h-100 d-block'
                 id='main-project-container' style='max-height: 870px;'>
@@ -400,11 +400,11 @@ $details .= "<div class='toolbar-container my-4 pt-1 text-md-sm w-100 w-md-auto'
             </ul>";
 
          $details .="<ul class='tab-content uk-switcher uk-margin' id='my-id'><li class='tab-pane fade show active' id='response-activity' data-uk-switcher-item='next'>";   
-         $details .= $this-> trail($leads_trail); 
+         $details .= $this->trail($leads_trail); 
          $details .= "</li><li class='tab-pane fade' id='response-project-details'>";  
-         $details .= $this-> details(); 
+         $details .= $this->details(); 
          $details .= "</li><li class='tab-pane fade' id='response-notes'>";
-         $details .= $this-> notes();
+         $details .= $this->notes($lead_id,$leads_notes);
          $details .= "</li></ul></div>";
    
    
@@ -833,8 +833,47 @@ public function details($arr=[])
    "; 
    return $details;
 }
-public function notes()
+public function notes($lead_id,$arr=[])
 {
-    return "";
+    $details = "";
+
+    foreach($arr as $trail)
+    {
+        $first_name = $trail["first_name"];
+        $description = $trail["description"];
+        $date_entered = $trail["date_entered"];
+    $details .= "
+    <div class='activity-log-item d-flex justify-content-between first' data-hash='ca53df1ebe434b6f14bd02c0fe7694ad'>
+        <div class='left-track flex-grow-0 d-flex flex-column align-items-center'>
+            <div class='line top'></div>
+            <div class='item-icon item-icon-called_alt'>
+                <div class='icon-border border rounded-circle d-flex justify-content-center align-items-center' style='background-color:#111637'>
+                    <i class='bi bi-person-lines-fill'></i>
+                </div>
+            </div>
+            <div class='line bottom flex-fill'></div>
+        </div>
+        <div class='details flex-column flex-grow-1 ml-2 mb-4 p-3 border text-sm'>
+            <div class='details-top d-flex justify-content-between text-sm text-grey-400'>
+                <div class='details-top-left flex-grow-1'>
+                    <div class='item-actor-name'>$first_name</div>
+                </div>
+                <div class='details-top-right'>
+                    <div class='item-date'>$date_entered</div>
+                </div>
+            </div>
+            <div class='details-center'>
+                <p class='item-message mb-0 mt-1'>$description</p>
+            </div>
+        </div>
+    </div>
+";
+
+$details .= " <div class='uk-margin'>";
+$details .=  "<textarea class='uk-textarea' rows='5' placeholder='Enter your notes' aria-label='Textarea'></textarea>";
+$details .=  "</div><p uk-margin><button class='uk-button uk-button-primary' m='$lead_id' id='add_note'>Enter Notes</button></p>";
+    }
+ 
+return $details;
 }
 }

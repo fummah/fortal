@@ -18,6 +18,7 @@ use App\Models\ServicePossibleAnswer;
 use App\Models\ServiceQuestion;
 use App\Models\LeadsTrailModel;
 use App\Models\TrailsModel;
+use App\Models\LeadsNotesModel;
 use Exception;
 
 class LeadsController extends Controller
@@ -109,8 +110,9 @@ public function getResponseDetails(Request $request)
     $contact_number = $lead->contact_number;
     $lead_status = $lead->status;
     $leads_trail = $this->getLeadsTrail($lead_id,$user->id);
+    $leads_notes = $this->getLeadsNotes($lead_id,$user->id);
    
-$details = $templates->showResponseDetails( $lead_id,$lead,$first_letter,$first_name,$last_name,$contacted,$remender,$lead_user_id,$frequent,$urgent,$is_phone_verified,$time,$service_name,$location,$description,$hiring_decision,$credits,$email,$contact_number,$lead_status,$leads_trail);
+$details = $templates->showResponseDetails( $lead_id,$lead,$first_letter,$first_name,$last_name,$contacted,$remender,$lead_user_id,$frequent,$urgent,$is_phone_verified,$time,$service_name,$location,$description,$hiring_decision,$credits,$email,$contact_number,$lead_status,$leads_trail,$leads_notes);
 
     return response($details);
 }
@@ -325,6 +327,36 @@ private function arrLeads($leads = array())
     }
     catch(Exception $e){
         return [];
+    }
+    }
+
+    public function getLeadsNotes($lead_id,$user_id)
+    {
+        try{
+        
+        $notes = LeadsNotesModel::join('users as u','lead_notes.user_id','=','u.id')
+        ->select('u.first_name','lead_notes.description','lead_notes.date_entered')        
+        ->where('lead_id',$lead_id)->where('user_id',$user_id)->get();
+        return $notes;
+    }
+    catch(Exception $e){
+        return [];
+    }
+    }
+
+    public function postNote(Request $request)
+    {
+        try{ 
+            $user = $request->user();
+            $user_id = $user->id;
+            $lead_id = (int)$request->lead_id;
+            $description = $request->description;
+        
+        $note = LeadsNotesModel::create(["lead_id"=>$lead_id,"description"=>$description,"entered_by"=>$user_id,"user_id"=>$user_id]);
+        return response()->json(["message"=>"Successfully added","note"=>$note],200);
+    }
+    catch(Exception $e){
+        return response()->json(["message"=>"There is an error"],500);
     }
     }
     

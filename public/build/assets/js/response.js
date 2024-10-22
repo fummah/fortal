@@ -61,6 +61,17 @@ $(document).on('click','.view_lead',function() {
    $("#show_details").html(details);
 });
 
+$(document).on('click','#add_note',function() {
+    var _token = $('input[name="_token"]').val();
+   let lead_id = $(this).attr("m");  
+   const obj = {_token,lead_id};
+   getHTMLResponse("addleadnote",obj).then((data) => {
+    console.log(data);
+}).catch((error) => {
+    console.log('There is an error : '+error);  // Handle the error here
+}); 
+});
+
 const displayLeads = (json) =>{
     const beFirstArr = $.grep(leadsArr, function(obj) {
         return obj.contacted === 0;
