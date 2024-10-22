@@ -141,6 +141,7 @@ class TemplatesController extends Controller
             return $details;
         }   
 
+    
   
   public function showResponseDetails( $lead_id,$lead,$first_letter,$first_name,$last_name,$contacted,$remender,$lead_user_id,$frequent,$urgent,$is_phone_verified,$time,$service_name,$location,$description,$hiring_decision,$credits,$email,$contact_number,$lead_status){
    
