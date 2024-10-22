@@ -20,6 +20,14 @@ class ProfileController extends Controller
         $user = $request->user();
         $first_name = $user->first_name;
         $email = $user->email;
+        $logo = $user->logo;
+        $contact_number=$user->contact_number;
+        $is_company_website=$user->is_company_website;
+        $company_size=$user->company_size;
+        $is_company_sales_team=$user->is_company_sales_team;
+        $location=$user->location;
+        $company_name = $user->company_name;
+        $company_registration_number = $user->company_registration_number;
         $credits_balance = $user->credits_balance;
         $timestamp = strtotime($user->login_at);
         $greetings = $this->greetings();
@@ -30,35 +38,67 @@ class ProfileController extends Controller
         $service_badge = count($latest_services)-2;
         $unread_leads = count($this->getUnreadLeads($user->id));
         
-        return view("dashboard",compact(["first_name","login_at","greetings","latest_services_limited","service_badge","email","number_of_leads","unread_leads","credits_balance"]));
+        return view("dashboard",compact(["first_name","login_at","greetings","contact_number","company_name","is_company_website","company_size","is_company_sales_team","logo","location","company_registration_number","latest_services_limited","service_badge","email","number_of_leads","unread_leads","credits_balance"]));
      }
-    public function edit(Request $request): View
-    {
-        $user = $request->user();
-        $services = ServicesModel::pluck('service_name')->toArray();
-        $latest_services = $this->getUserServices($user->id);
-        return view('profile.edit', [
-            'user' => $request->user(),
-            'services'=>$services,
-            'latest_services'=>$latest_services
-        ]);
-    }
+     public function edit(Request $request): View
+     {
+         $user = $request->user();
+         $services = ServicesModel::pluck('service_name')->toArray();
+         $latest_services = $this->getUserServices($user->id);
+     
+         return view('profile.edit', [
+             'user' => $user,
+             'services' => $services,
+             'company_name' => $user->company_name,
+             'is_company_website' => $user->is_company_website,
+             'company_size' => $user->company_size,
+             'is_company_sales_team' => $user->is_company_sales_team,
+             'contact_number' => $user->contact_number,
+             'company_registration_number' => $user->company_registration_number,
+             'location'=>$user->location,
+             'latest_services' => $latest_services,
+         ]);
+     }
+     
 
-    /**
-     * Update the user's profile information.
-     */
-    public function update(ProfileUpdateRequest $request): RedirectResponse
-    {
-        $request->user()->fill($request->validated());
-
-        if ($request->user()->isDirty('email')) {
-            $request->user()->email_verified_at = null;
-        }
-
-        $request->user()->save();
-
-        return Redirect::route('profile.edit')->with('status', 'profile-updated')->with('user', $request->first_name);
-    }
+   
+     public function update(ProfileUpdateRequest $request): RedirectResponse
+     {
+         
+         $request->user()->fill($request->validated());
+     
+        
+         if ($request->user()->isDirty('email')) {
+             $request->user()->email_verified_at = null;
+         }
+     
+         
+         if ($request->user()->isDirty()) {
+             
+             $request->user()->save();
+     
+             
+             $first_name = $request->first_name;
+             $company_name = $request->company_name;
+             $company_registration_number = $request->company_registration_number;
+             $logo = $request->logo;
+     
+           
+             return Redirect::route('profile.edit')
+                 ->with('status', 'profile-updated')
+                 ->with('success', 'Profile updated successfully!')
+                 ->with([
+                     'user' => $first_name,
+                     'company_name' => $company_name,
+                     'company_registration_number' => $company_registration_number,
+                     'logo' => $logo
+                 ]);
+         }
+     
+         
+         return Redirect::route('profile.edit')->with('status', 'No changes were made.');
+     }
+     
 
     public function updateServices(Request $request): RedirectResponse
     {
@@ -112,19 +152,20 @@ class ProfileController extends Controller
         return (int)$id;
     }
     private function greetings()
-    {
-      
-$current_hour = (int)date('H')+2;
-if ($current_hour >= 5 && $current_hour < 12) {
-    $greeting = 'Good morning';
-} elseif ($current_hour >= 12 && $current_hour < 17) {
-    $greeting = 'Good afternoon';
-} elseif ($current_hour >= 17 && $current_hour < 21) {
-    $greeting = 'Good evening';
-} else {
-    $greeting = 'Good night';
-}
-return $greeting;
+{
+    $current_hour = (int)date('H') + 2;
+
+    if ($current_hour >= 5 && $current_hour < 12) {
+        return 'Good morning';
+    } elseif ($current_hour >= 12 && $current_hour < 17) {
+        return 'Good afternoon';
+    } elseif ($current_hour >= 17 && $current_hour < 21) {
+        return 'Good evening';
+    } else {
+        return 'Good night';
+    }
+
+
 
     }
     public function getUserServices($user_id){

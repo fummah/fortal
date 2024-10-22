@@ -63,17 +63,3 @@ $(document).ready(function() {
     setInterval(showNextImage, 3000); 
 });
 
-function showContent(tab) {
-    var sections = ['profile', 'services', 'password', 'buy-credits', 'notifications', 'business-info'];
-    sections.forEach(function (section) {
-        document.getElementById(section).classList.add('hidden');
-    });
-    document.getElementById(tab).classList.remove('hidden');
-
-    // Update active tab class
-    document.querySelectorAll('ul.flex li button').forEach(function (btn) {
-        btn.classList.remove('text-blue-500', 'border-blue-500', 'font-semibold');
-        btn.classList.add('text-gray-500');
-    });
-    event.target.classList.add('text-blue-500', 'border-blue-500', 'font-semibold');
-}
