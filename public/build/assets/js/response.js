@@ -70,7 +70,7 @@ $(document).on('click','#add_note',function() {
 }).catch((error) => {
     console.log('There is an error : '+error);  // Handle the error here
 }); 
-});
+}); 
 
 const displayLeads = (json) =>{
     const beFirstArr = $.grep(leadsArr, function(obj) {
